@@ -366,28 +366,29 @@ main { flex: 1; }
 .tool-card {
   display: flex;
   align-items: flex-start;
-  gap: 0.65rem;
-  padding: 0.85rem;
+  gap: 0.6rem;
+  padding: 0.75rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
   color: var(--fg);
-  transition: border-color 0.12s, box-shadow 0.12s;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
   position: relative;
   min-width: 0;
 }
 .tool-card:hover {
   border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent-bg);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  transform: translateY(-1px);
   opacity: 1;
   color: var(--fg);
 }
 
 .tool-card__logo {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
-  border-radius: 8px;
+  border-radius: 7px;
   overflow: hidden;
   background: #fff;
   display: flex;
@@ -395,18 +396,18 @@ main { flex: 1; }
   justify-content: center;
 }
 .tool-card__logo img {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
 }
 .tool-logo-fallback {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
   background: var(--accent-bg);
   color: var(--accent);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.9rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -418,10 +419,11 @@ main { flex: 1; }
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.15rem;
+  padding-right: 1rem;
 }
 .tool-card__name {
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   font-weight: 600;
   color: var(--fg);
   white-space: nowrap;
@@ -430,7 +432,7 @@ main { flex: 1; }
   display: block;
 }
 .tool-card__desc {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--fg-muted);
   line-height: 1.45;
   display: -webkit-box;
@@ -438,17 +440,31 @@ main { flex: 1; }
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.tool-card__price {
-  margin-top: 0.2rem;
-  align-self: flex-start;
+
+/* Pricing icon — always visible, swaps with ext-link on hover */
+.tool-card__price-icon {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.55;
+  transition: opacity 0.15s;
+  line-height: 1;
 }
+.tool-card:hover .tool-card__price-icon { opacity: 0; }
+.price-free     { color: var(--green); }
+.price-freemium { color: var(--yellow); }
+.price-paid     { color: var(--fg-faint); }
+
 .tool-card__ext {
   position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
+  top: 0.55rem;
+  right: 0.55rem;
   color: var(--fg-faint);
   opacity: 0;
-  transition: opacity 0.12s;
+  transition: opacity 0.15s;
 }
 .tool-card:hover .tool-card__ext { opacity: 1; }
 
