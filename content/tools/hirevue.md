@@ -1,0 +1,14 @@
+---
+title: 'HireVue'
+name: 'HireVue'
+slug: 'hirevue'
+subtitle: 'AI-powered video interviewing and assessment platform'
+description: 'HireVue is a video interviewing platform that allows candidates to complete structured interviews asynchronously, with AI analysing responses for job-relevant competencies and communication skills. Its game-based assessments measure cognitive ability and problem-solving without traditional aptitude tests. Enterprises with high-volume hiring — retail, financial services, healthcare — use HireVue to screen thousands of candidates efficiently and reduce time-to-hire dramatically.'
+website: 'https://hirevue.com'
+logo_url: ''
+category: 'hr'
+category_name: 'HR'
+price: 'Paid'
+featured: false
+date: '2025-01-01'
+---

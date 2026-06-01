@@ -1,9 +1,9 @@
 ---
 title: 'Claude-3'
-name: 'Claude-3'
-subtitle: 'Anthropic''s powerful AI model family for text and reasoning'
+name: 'Claude 4'
+subtitle: 'Anthropic''s Claude 4 model family — Haiku, Sonnet, and Opus'
 slug: 'claude-3'
-description: 'Claude 3 is Anthropic''s family of large language models — Haiku, Sonnet, and Opus — spanning fast and affordable to highly capable. All Claude models are trained with Constitutional AI to be helpful, harmless, and honest, with an industry-leading 200k-token context window for analysing long documents. Developers access Claude through an API for use cases from customer service to complex reasoning pipelines.'
+description: 'Claude 4 is Anthropic''s latest generation of large language models, with Opus 4.7 as the most capable, Sonnet 4.6 as the balanced workhorse, and Haiku 4.5 as the fastest and most affordable. All models feature a 200k-token context window, strong coding and reasoning ability, and Constitutional AI safety training. Developers access the family via the Anthropic API to build everything from document-analysis pipelines to fully autonomous coding agents.'
 website: 'https://anthropic.com/claude'
 logo_url: ''
 category: 'models'

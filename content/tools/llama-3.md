@@ -1,9 +1,9 @@
 ---
 title: 'Llama 3'
-name: 'Llama 3'
-subtitle: 'Meta''s open-source large language model for developers'
+name: 'Llama 4'
+subtitle: 'Meta''s latest open-weight language model family'
 slug: 'llama-3'
-description: 'Llama 3 is Meta''s open-weight family of large language models, available for free commercial use under Meta''s community licence. It comes in 8B, 70B, and 405B parameter variants, giving developers the flexibility to run a lightweight model on a laptop or a frontier-class model in a data centre. Its open nature has made it the most deployed open-source LLM, used everywhere from research labs to production chatbots.'
+description: 'Llama 4 is Meta''s latest generation of open-weight large language models, featuring a Mixture-of-Experts architecture that achieves frontier-level capability while remaining freely downloadable under Meta''s community licence. The family spans Scout (17B active parameters, 10M-token context), Maverick (17B active, multimodal), and Behemoth (288B active, teacher model) variants. Its open nature makes it the most widely self-hosted and fine-tuned LLM family, deployed in production across research labs, enterprises, and consumer applications worldwide.'
 website: 'https://llama.meta.com'
 logo_url: ''
 category: 'models'
