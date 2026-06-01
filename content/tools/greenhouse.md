@@ -1,0 +1,14 @@
+---
+title: 'Greenhouse'
+name: 'Greenhouse'
+subtitle: 'AI recruiting and applicant tracking system'
+slug: 'greenhouse'
+description: 'Greenhouse is a structured hiring platform used by high-growth companies to run consistent, data-driven recruiting processes. Its AI tools assist with job description writing, candidate scoring, interview scheduling automation, and diversity analytics. Companies like Airbnb, HubSpot, and Squarespace use Greenhouse to reduce bias and improve the quality and speed of every hire.'
+website: 'https://greenhouse.io'
+logo_url: ''
+category: 'hr'
+category_name: 'HR'
+price: 'Paid'
+featured: false
+date: '2025-09-21'
+---

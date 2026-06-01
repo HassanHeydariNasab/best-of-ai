@@ -1,0 +1,113 @@
+{{ define "main" }}
+{{ $p     := .Params }}
+{{ $slug  := $p.slug }}
+{{ $tools := where .Site.RegularPages "Section" "tools" }}
+{{ $catTools := where $tools "Params.category" $slug }}
+{{ $catTools  = sort $catTools "Params.name" "asc" }}
+
+<div class="container">
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb">
+    <a href="{{ "/" | relURL }}">Home</a>
+    <span class="breadcrumb__sep">/</span>
+    <a href="{{ "/categories/" | relURL }}">Categories</a>
+    <span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__cur">{{ $p.name }}</span>
+  </nav>
+
+  <!-- Category hero -->
+  <div class="cat-hero">
+    <div class="cat-hero__icon">
+      {{ substr $p.name 0 1 }}
+    </div>
+    <div>
+      <h1 class="cat-hero__title">Best AI {{ $p.name }} Tools</h1>
+      <p class="cat-hero__desc">{{ $p.description }}</p>
+      <div class="cat-hero__meta">
+        <span><strong>{{ len $catTools }}</strong> tools</span>
+        <span class="stat-sep">·</span>
+        <span>handpicked &amp; curated</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Price filter -->
+  <div class="price-bar" id="price-bar" style="margin-bottom:1.5rem">
+    <span class="price-bar__label">// price</span>
+    <button class="pf active" data-price="all">all</button>
+    <button class="pf" data-price="Free">free</button>
+    <button class="pf" data-price="Freemium">freemium</button>
+    <button class="pf" data-price="Paid">paid</button>
+  </div>
+
+  <!-- Tools grid -->
+  {{ if $catTools }}
+  <div class="tools-grid" id="cat-tools-grid">
+    {{ range $catTools }}
+    {{ $tp := .Params }}
+    <a
+      href="{{ .RelPermalink }}"
+      class="tool-card"
+      data-price="{{ $tp.price }}"
+    >
+      <div class="tool-card__logo">
+        {{ if $tp.logo_url }}
+          <img src="{{ $tp.logo_url }}" alt="{{ $tp.name }}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="tool-logo-fallback" style="display:none">{{ substr $tp.name 0 1 }}</span>
+        {{ else }}
+          <img src="https://www.google.com/s2/favicons?domain={{ $tp.website }}&sz=32" alt="{{ $tp.name }}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="tool-logo-fallback" style="display:none">{{ substr $tp.name 0 1 }}</span>
+        {{ end }}
+      </div>
+      <div class="tool-card__body">
+        <span class="tool-card__name">{{ $tp.name }}</span>
+        <span class="tool-card__desc">{{ or $tp.subtitle ($tp.description | truncate 80) }}</span>
+        {{ if $tp.price }}<span class="tool-card__price badge badge-{{ lower $tp.price }}">{{ $tp.price }}</span>{{ end }}
+      </div>
+      <svg class="tool-card__ext" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+    {{ end }}
+  </div>
+  {{ else }}
+  <p style="color:var(--fg-muted);padding:2rem 0">No tools in this category yet. <a href="{{ .Site.Params.githubRepo }}/issues/new?template=submit-tool.md">Submit one →</a></p>
+  {{ end }}
+
+  <!-- Other categories -->
+  <section class="other-cats-section">
+    <h2 class="other-cats__title">// browse other categories</h2>
+    <div class="other-cats-grid">
+      {{ range hugo.Data.categories }}
+        {{ $cat := . }}
+        {{ if ne $cat.slug $slug }}
+          {{ $ct := where $tools "Params.category" $cat.slug }}
+          {{ if $ct }}
+          <a href="{{ printf "/categories/%s/" $cat.slug | relURL }}" class="other-cat-card">
+            <span class="other-cat-card__name">{{ $cat.name }}</span>
+            <span class="other-cat-card__count">{{ len $ct }}</span>
+          </a>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function() {
+  var btns  = document.querySelectorAll('.pf');
+  var cards = document.querySelectorAll('#cat-tools-grid .tool-card');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var price = btn.dataset.price;
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      cards.forEach(function(card) {
+        card.style.display = (price === 'all' || card.dataset.price === price) ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+{{ end }}

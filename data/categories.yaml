@@ -1,0 +1,486 @@
+-
+  id: 39
+  name: '3D'
+  description: ''
+  slug: '3d'
+  sort_order: 0
+-
+  id: 38
+  name: 'AI Agents'
+  description: ''
+  slug: 'ai-agents'
+  sort_order: 0
+-
+  id: 80
+  name: 'AI Companion'
+  description: 'AI chat companions, virtual friends, and personal AI characters.'
+  slug: 'ai-companion'
+  sort_order: 0
+-
+  id: 43
+  name: 'Ad Generator'
+  description: ''
+  slug: 'ad-generator'
+  sort_order: 0
+-
+  id: 47
+  name: 'Animation'
+  description: ''
+  slug: 'animation'
+  sort_order: 0
+-
+  id: 31
+  name: 'App Builders'
+  description: ''
+  slug: 'app-builders'
+  sort_order: 0
+-
+  id: 78
+  name: 'Background Remover'
+  description: 'AI tools that automatically remove or replace image backgrounds.'
+  slug: 'background-remover'
+  sort_order: 0
+-
+  id: 35
+  name: 'Business Tools'
+  description: ''
+  slug: 'business-tools'
+  sort_order: 0
+-
+  id: 53
+  name: 'CRM'
+  description: ''
+  slug: 'crm'
+  sort_order: 0
+-
+  id: 57
+  name: 'Calendar Scheduling'
+  description: ''
+  slug: 'calendar-scheduling'
+  sort_order: 0
+-
+  id: 68
+  name: 'Climate'
+  description: ''
+  slug: 'climate'
+  sort_order: 0
+-
+  id: 73
+  name: 'Code Assistant'
+  description: 'AI-powered coding assistants, code completion, and pair programming tools.'
+  slug: 'code-assistant'
+  sort_order: 0
+-
+  id: 30
+  name: 'Copywriting'
+  description: ''
+  slug: 'copywriting'
+  sort_order: 0
+-
+  id: 70
+  name: 'DevTools'
+  description: ''
+  slug: 'devtools'
+  sort_order: 0
+-
+  id: 79
+  name: 'Document AI'
+  description: 'AI tools for reading, analyzing, and extracting insights from documents and PDFs.'
+  slug: 'document-ai'
+  sort_order: 0
+-
+  id: 60
+  name: 'E-Commerce'
+  description: ''
+  slug: 'e-commerce'
+  sort_order: 0
+-
+  id: 44
+  name: 'Email Assistants'
+  description: ''
+  slug: 'email-assistants'
+  sort_order: 0
+-
+  id: 65
+  name: 'Farming'
+  description: ''
+  slug: 'farming'
+  sort_order: 0
+-
+  id: 41
+  name: 'Fashion'
+  description: ''
+  slug: 'fashion'
+  sort_order: 0
+-
+  id: 33
+  name: 'Finance'
+  description: ''
+  slug: 'finance'
+  sort_order: 0
+-
+  id: 67
+  name: 'Government'
+  description: ''
+  slug: 'government'
+  sort_order: 0
+-
+  id: 64
+  name: 'HR'
+  description: ''
+  slug: 'hr'
+  sort_order: 0
+-
+  id: 69
+  name: 'Home Design'
+  description: ''
+  slug: 'home-design'
+  sort_order: 0
+-
+  id: 77
+  name: 'Image Editing'
+  description: 'AI tools for editing, enhancing, and transforming existing images.'
+  slug: 'image-editing'
+  sort_order: 0
+-
+  id: 72
+  name: 'Image Generation'
+  description: 'AI tools for generating images and artwork from text prompts.'
+  slug: 'image-generation'
+  sort_order: 0
+-
+  id: 45
+  name: 'Infographics'
+  description: ''
+  slug: 'infographics'
+  sort_order: 0
+-
+  id: 56
+  name: 'Job Tools'
+  description: ''
+  slug: 'job-tools'
+  sort_order: 0
+-
+  id: 81
+  name: 'Knowledge Management'
+  description: 'AI tools for organizing, connecting, and retrieving personal and team knowledge.'
+  slug: 'knowledge-management'
+  sort_order: 0
+-
+  id: 61
+  name: 'Language Learning'
+  description: ''
+  slug: 'language-learning'
+  sort_order: 0
+-
+  id: 59
+  name: 'Lead Generation'
+  description: ''
+  slug: 'lead-generation'
+  sort_order: 0
+-
+  id: 62
+  name: 'Learning Tools'
+  description: ''
+  slug: 'learning-tools'
+  sort_order: 0
+-
+  id: 40
+  name: 'Logo Generator'
+  description: ''
+  slug: 'logo-generator'
+  sort_order: 0
+-
+  id: 58
+  name: 'Market Research'
+  description: ''
+  slug: 'market-research'
+  sort_order: 0
+-
+  id: 46
+  name: 'Meme Generator'
+  description: ''
+  slug: 'meme-generator'
+  sort_order: 0
+-
+  id: 74
+  name: 'Music Generation'
+  description: 'AI tools for generating original music, beats, and soundtracks.'
+  slug: 'music-generation'
+  sort_order: 0
+-
+  id: 42
+  name: 'No-Code'
+  description: ''
+  slug: 'no-code'
+  sort_order: 0
+-
+  id: 52
+  name: 'Note-Taking Apps'
+  description: ''
+  slug: 'note-taking-apps'
+  sort_order: 0
+-
+  id: 50
+  name: 'Podcast'
+  description: ''
+  slug: 'podcast'
+  sort_order: 0
+-
+  id: 26
+  name: 'Presentation'
+  description: ''
+  slug: 'presentation'
+  sort_order: 0
+-
+  id: 34
+  name: 'Project Management'
+  description: ''
+  slug: 'project-management'
+  sort_order: 0
+-
+  id: 63
+  name: 'Real Estate'
+  description: ''
+  slug: 'real-estate'
+  sort_order: 0
+-
+  id: 55
+  name: 'Resume Tools'
+  description: ''
+  slug: 'resume-tools'
+  sort_order: 0
+-
+  id: 54
+  name: 'Sales Tools'
+  description: ''
+  slug: 'sales-tools'
+  sort_order: 0
+-
+  id: 36
+  name: 'Social Media Tools'
+  description: ''
+  slug: 'social-media-tools'
+  sort_order: 0
+-
+  id: 66
+  name: 'Supply Chain'
+  description: ''
+  slug: 'supply-chain'
+  sort_order: 0
+-
+  id: 48
+  name: 'Talking Avatar Generator'
+  description: ''
+  slug: 'talking-avatar-generator'
+  sort_order: 0
+-
+  id: 75
+  name: 'Text to Speech'
+  description: 'AI tools that convert written text into natural-sounding speech.'
+  slug: 'text-to-speech'
+  sort_order: 0
+-
+  id: 76
+  name: 'Transcription'
+  description: 'AI-powered tools for transcribing audio and video to text.'
+  slug: 'transcription'
+  sort_order: 0
+-
+  id: 25
+  name: 'Translator'
+  description: ''
+  slug: 'translator'
+  sort_order: 0
+-
+  id: 27
+  name: 'Video Editor'
+  description: ''
+  slug: 'video-editor'
+  sort_order: 0
+-
+  id: 29
+  name: 'Video Enhancer'
+  description: ''
+  slug: 'video-enhancer'
+  sort_order: 0
+-
+  id: 28
+  name: 'Video Generator'
+  description: ''
+  slug: 'video-generator'
+  sort_order: 0
+-
+  id: 49
+  name: 'Video Subtitling'
+  description: ''
+  slug: 'video-subtitling'
+  sort_order: 0
+-
+  id: 51
+  name: 'Voice Cloning'
+  description: ''
+  slug: 'voice-cloning'
+  sort_order: 0
+-
+  id: 32
+  name: 'Website Builders'
+  description: ''
+  slug: 'website-builders'
+  sort_order: 0
+-
+  id: 37
+  name: 'Workflow Automation'
+  description: ''
+  slug: 'workflow-automation'
+  sort_order: 0
+-
+  id: 1
+  name: 'Productivity'
+  description: 'AI-powered productivity tools'
+  slug: 'productivity'
+  sort_order: 1
+-
+  id: 3
+  name: 'Chatbots'
+  description: ''
+  slug: 'chatbots'
+  sort_order: 5
+-
+  id: 8
+  name: 'Academia'
+  description: ''
+  slug: 'academia'
+  sort_order: 10
+-
+  id: 12
+  name: 'Audio'
+  description: ''
+  slug: 'audio'
+  sort_order: 10
+-
+  id: 15
+  name: 'Automation'
+  description: ''
+  slug: 'automation'
+  sort_order: 10
+-
+  id: 9
+  name: 'Customer Support'
+  description: ''
+  slug: 'customer-support'
+  sort_order: 10
+-
+  id: 16
+  name: 'Data'
+  description: ''
+  slug: 'data'
+  sort_order: 10
+-
+  id: 18
+  name: 'Food'
+  description: ''
+  slug: 'food'
+  sort_order: 10
+-
+  id: 21
+  name: 'Gaming'
+  description: ''
+  slug: 'gaming'
+  sort_order: 10
+-
+  id: 10
+  name: 'Graphic Design'
+  description: ''
+  slug: 'graphic-design'
+  sort_order: 10
+-
+  id: 20
+  name: 'Healthcare'
+  description: ''
+  slug: 'healthcare'
+  sort_order: 10
+-
+  id: 17
+  name: 'Legal Assistants'
+  description: ''
+  slug: 'legal-assistants'
+  sort_order: 10
+-
+  id: 5
+  name: 'Local Search Engines'
+  description: ''
+  slug: 'local-search-engines'
+  sort_order: 10
+-
+  id: 13
+  name: 'Marketing'
+  description: ''
+  slug: 'marketing'
+  sort_order: 10
+-
+  id: 7
+  name: 'Meeting Assistants'
+  description: ''
+  slug: 'meeting-assistants'
+  sort_order: 10
+-
+  id: 22
+  name: 'Personal Assistants'
+  description: ''
+  slug: 'personal-assistants'
+  sort_order: 10
+-
+  id: 24
+  name: 'Research Tools'
+  description: ''
+  slug: 'research-tools'
+  sort_order: 10
+-
+  id: 14
+  name: 'SEO'
+  description: ''
+  slug: 'seo'
+  sort_order: 10
+-
+  id: 4
+  name: 'Search Engines'
+  description: ''
+  slug: 'search-engines'
+  sort_order: 10
+-
+  id: 23
+  name: 'Spreadsheets'
+  description: ''
+  slug: 'spreadsheets'
+  sort_order: 10
+-
+  id: 11
+  name: 'Video'
+  description: ''
+  slug: 'video'
+  sort_order: 10
+-
+  id: 19
+  name: 'Weather'
+  description: ''
+  slug: 'weather'
+  sort_order: 10
+-
+  id: 6
+  name: 'Writing Assistants'
+  description: ''
+  slug: 'writing-assistants'
+  sort_order: 10
+-
+  id: 2
+  name: 'Models'
+  description: ''
+  slug: 'models'
+  sort_order: 21
+-
+  id: 71
+  name: 'AI Directories'
+  description: 'Comprehensive directories and listings of AI tools and services'
+  slug: 'ai-directories'
+  sort_order: 71

@@ -1,0 +1,55 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+
+{{ $name := or .Params.name .Title }}
+{{ $desc := or .Params.description .Site.Params.description }}
+
+{{ $pageTitle := "" }}
+{{ if .IsHome }}
+  {{ $pageTitle = "Best of AI — Handpicked AI Tools" }}
+{{ else if and .IsPage (eq .Section "tools") }}
+  {{ $pageTitle = printf "%s — Best of AI" $name }}
+{{ else if and .IsPage (eq .Section "categories") }}
+  {{ $pageTitle = printf "Best AI %s Tools — Best of AI" .Params.name }}
+{{ else if eq .Kind "section" }}
+  {{ $pageTitle = printf "%s — Best of AI" (.Title | default "Categories") }}
+{{ else if $name }}
+  {{ $pageTitle = printf "%s — Best of AI" $name }}
+{{ else }}
+  {{ $pageTitle = "Best of AI" }}
+{{ end }}
+
+<title>{{ $pageTitle }}</title>
+<meta name="description" content="{{ $desc }}">
+<link rel="canonical" href="{{ .Permalink }}">
+
+<!-- Open Graph -->
+<meta property="og:title"       content="{{ $pageTitle }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url"         content="{{ .Permalink }}">
+<meta property="og:type"        content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+<meta property="og:site_name"   content="Best of AI">
+
+<!-- Twitter -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="{{ $pageTitle }}">
+<meta name="twitter:description" content="{{ $desc }}">
+
+<!-- RSS -->
+{{ with .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .Permalink }}">
+{{ end }}
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml"  href="{{ "img/favicon/favicon.svg" | relURL }}">
+<link rel="icon" type="image/png"      href="{{ "img/favicon/favicon-96x96.png" | relURL }}" sizes="96x96">
+<link rel="apple-touch-icon"           href="{{ "img/favicon/apple-touch-icon.png" | relURL }}">

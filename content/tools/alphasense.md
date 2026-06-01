@@ -1,0 +1,14 @@
+---
+title: 'AlphaSense'
+name: 'AlphaSense'
+subtitle: 'AI-powered financial search and analysis'
+slug: 'alphasense'
+description: 'AlphaSense is an AI-powered market intelligence platform used by finance professionals to search across earnings calls, SEC filings, broker research, and news in seconds. Its semantic search understands financial language and surfaces insights that keyword search would miss. Hedge funds, investment banks, and corporate strategy teams use it to compress research time.'
+website: 'https://alpha-sense.com'
+logo_url: ''
+category: 'finance'
+category_name: 'Finance'
+price: 'Paid'
+featured: false
+date: '2025-09-21'
+---

@@ -1,0 +1,42 @@
+{{ $tools := where .Site.RegularPages "Section" "tools" }}
+
+<footer class="site-footer">
+  <div class="footer-body container">
+    <div class="footer-brand">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" fill="var(--accent)"/>
+        <path d="M2 17l10 5 10-5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 12l10 5 10-5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+      </svg>
+      <span>Best of <span style="color:var(--accent)">AI</span></span>
+    </div>
+    <p class="footer-desc">{{ .Site.Params.description }}</p>
+
+    <div class="footer-links">
+      <div class="footer-col">
+        <div class="footer-col__title">// directory</div>
+        <a href="{{ "/" | relURL }}" class="footer-cmd"><span>›</span> Browse all tools</a>
+        <a href="{{ .Site.Params.githubRepo }}/issues/new?template=submit-tool.md&title=Submit+Tool" target="_blank" rel="noopener" class="footer-cmd"><span>›</span> Submit a tool</a>
+        <a href="{{ "/index.json" | relURL }}" class="footer-cmd"><span>›</span> index.json</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col__title">// project</div>
+        <a href="{{ .Site.Params.githubRepo }}" target="_blank" rel="noopener" class="footer-cmd"><span>›</span> ★ star on GitHub</a>
+        <a href="{{ .Site.Params.githubRepo }}/issues/new" target="_blank" rel="noopener" class="footer-cmd"><span>›</span> report an issue</a>
+        <a href="{{ "/sitemap.xml" | relURL }}" class="footer-cmd"><span>›</span> sitemap.xml</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-statusbar">
+    <span>Best of AI</span>
+    <span class="footer-sep">·</span>
+    <span><strong>{{ len $tools }}</strong> tools</span>
+    <span class="footer-sep">·</span>
+    <span>hugo</span>
+    <span class="footer-sep">·</span>
+    <span>github pages</span>
+    <span class="footer-sep footer-right-sep">|</span>
+    <span>© {{ now.Year }} · open source</span>
+  </div>
+</footer>

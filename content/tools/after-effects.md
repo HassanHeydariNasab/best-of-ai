@@ -1,0 +1,14 @@
+---
+title: 'Adobe After Effects'
+name: 'Adobe After Effects'
+subtitle: 'AI-enhanced motion graphics and animation'
+slug: 'after-effects'
+description: 'Adobe After Effects is the industry-standard motion graphics and visual effects application, used for everything from title sequences to full compositing work. Recent AI features — including Content-Aware Fill for video and Rotobrush — dramatically reduce the manual work behind complex shots. It''s a core tool for video editors, motion designers, and VFX artists.'
+website: 'https://adobe.com/aftereffects'
+logo_url: ''
+category: 'animation'
+category_name: 'Animation'
+price: 'Paid'
+featured: false
+date: '2025-09-21'
+---

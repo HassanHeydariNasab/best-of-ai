@@ -1,0 +1,212 @@
+{{ define "main" }}
+{{ $tools := where .Site.RegularPages "Section" "tools" }}
+
+<!-- ── Hero ── -->
+<div class="home-hero container">
+  <div class="home-hero__text">
+    <h1 class="home-hero__title">Best of <span class="hero-accent">AI</span></h1>
+    <p class="home-hero__sub">{{ .Site.Params.description }}</p>
+    <div class="home-hero__stats">
+      <span><strong>{{ len $tools }}</strong> tools</span>
+      <span class="stat-sep">·</span>
+      <span><strong>{{ len hugo.Data.categories }}</strong> categories</span>
+      <span class="stat-sep">·</span>
+      <span>handpicked &amp; updated</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Main layout: sidebar + tool sections ── -->
+<div class="home-body container">
+
+  <!-- Category sidebar -->
+  <aside class="cat-sidebar" id="cat-sidebar">
+    <div class="cat-sidebar__head">
+      <span class="cat-sidebar__label">// categories</span>
+    </div>
+    <nav class="cat-sidebar__nav">
+      <a href="#" class="cat-link active" data-filter="all">All tools <span class="cat-count">{{ len $tools }}</span></a>
+      {{ range hugo.Data.categories }}
+        {{ $cat := . }}
+        {{ $catTools := where $tools "Params.category" $cat.slug }}
+        {{ if $catTools }}
+        <a href="{{ printf "/categories/%s/" $cat.slug | relURL }}" class="cat-link" data-filter="{{ $cat.slug }}">
+          {{ $cat.name }}
+          <span class="cat-count">{{ len $catTools }}</span>
+        </a>
+        {{ end }}
+      {{ end }}
+    </nav>
+  </aside>
+
+  <!-- Tool sections -->
+  <div class="home-main" id="home-main">
+    <!-- Search bar -->
+    <div class="home-search-wrap">
+      <svg class="home-search__icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-3.5-3.5"/></svg>
+      <input
+        id="home-search"
+        class="home-search__input"
+        type="text"
+        placeholder="Search {{ len $tools }}+ AI tools..."
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Search tools"
+      >
+      <kbd class="home-search__kbd">⌘K</kbd>
+    </div>
+
+    <!-- Price filter bar -->
+    <div class="price-bar" id="price-bar">
+      <span class="price-bar__label">// price</span>
+      <button class="pf active" data-price="all">all</button>
+      <button class="pf" data-price="Free">free</button>
+      <button class="pf" data-price="Freemium">freemium</button>
+      <button class="pf" data-price="Paid">paid</button>
+    </div>
+
+    <!-- No-results message (hidden by default) -->
+    <div class="no-results" id="no-results" hidden>
+      <p>No tools found matching your search.</p>
+      <button onclick="document.getElementById('home-search').value='';window.baiFilter()">Clear search</button>
+    </div>
+
+    {{ range hugo.Data.categories }}
+      {{ $cat := . }}
+      {{ $catTools := where $tools "Params.category" $cat.slug }}
+      {{ if $catTools }}
+      <section class="tool-section" id="{{ $cat.slug }}" data-cat="{{ $cat.slug }}">
+        <h2 class="tool-section__title">{{ $cat.name }}<span class="tool-section__count">{{ len $catTools }}</span></h2>
+        <div class="tools-grid">
+          {{ range $catTools }}
+          {{ $p := .Params }}
+          <a
+            href="{{ .RelPermalink }}"
+            class="tool-card"
+            data-name="{{ lower $p.name }}"
+            data-desc="{{ lower $p.description }}"
+            data-cat="{{ $p.category }}"
+            data-price="{{ $p.price }}"
+          >
+            <div class="tool-card__logo">
+              {{ if $p.logo_url }}
+                <img src="{{ $p.logo_url }}" alt="{{ $p.name }}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <span class="tool-logo-fallback" style="display:none">{{ substr $p.name 0 1 }}</span>
+              {{ else }}
+                <img src="https://www.google.com/s2/favicons?domain={{ $p.website }}&sz=32" alt="{{ $p.name }}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <span class="tool-logo-fallback" style="display:none">{{ substr $p.name 0 1 }}</span>
+              {{ end }}
+            </div>
+            <div class="tool-card__body">
+              <span class="tool-card__name">{{ $p.name }}</span>
+              <span class="tool-card__desc">{{ or $p.subtitle ($p.description | truncate 80) }}</span>
+              {{ if $p.price }}
+              <span class="tool-card__price badge badge-{{ lower $p.price }}">{{ $p.price }}</span>
+              {{ end }}
+            </div>
+            <svg class="tool-card__ext" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+          {{ end }}
+        </div>
+      </section>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
+
+<script>
+(function() {
+  var searchInput = document.getElementById('home-search');
+  var noResults   = document.getElementById('no-results');
+  var catLinks    = document.querySelectorAll('.cat-link');
+  var priceFilters = document.querySelectorAll('.pf');
+
+  var activePrice = 'all';
+  var activeCat   = 'all';
+
+  function filter() {
+    var q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+    var totalVisible = 0;
+
+    document.querySelectorAll('.tool-section').forEach(function(section) {
+      var catSlug   = section.dataset.cat;
+      var showSect  = (activeCat === 'all' || activeCat === catSlug);
+      var sectVisible = 0;
+
+      section.querySelectorAll('.tool-card').forEach(function(card) {
+        var matchQ  = !q || card.dataset.name.includes(q) || card.dataset.desc.includes(q);
+        var matchP  = activePrice === 'all' || card.dataset.price === activePrice;
+        var show    = showSect && matchQ && matchP;
+        card.style.display = show ? '' : 'none';
+        if (show) sectVisible++;
+      });
+
+      section.style.display = (showSect && sectVisible > 0) ? '' : 'none';
+      totalVisible += sectVisible;
+    });
+
+    if (noResults) noResults.hidden = (totalVisible > 0);
+  }
+
+  window.baiFilter = filter;
+
+  if (searchInput) {
+    searchInput.addEventListener('input', filter);
+    searchInput.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+    // ⌘K opens the global modal but inline search handles typing
+    document.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        // handled by search modal
+      }
+    });
+  }
+
+  catLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      if (link.dataset.filter !== 'all') {
+        // Let anchor navigation happen for non-all
+      }
+      e.preventDefault();
+      activeCat = link.dataset.filter || 'all';
+      catLinks.forEach(function(l) { l.classList.remove('active'); });
+      link.classList.add('active');
+
+      if (activeCat !== 'all') {
+        var target = document.getElementById(activeCat);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      filter();
+    });
+  });
+
+  priceFilters.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      activePrice = btn.dataset.price;
+      priceFilters.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      filter();
+    });
+  });
+
+  // Scrollspy: highlight active category in sidebar
+  var sections = document.querySelectorAll('.tool-section[id]');
+  window.addEventListener('scroll', function() {
+    var scrollY = window.scrollY + 120;
+    var current = '';
+    sections.forEach(function(s) {
+      if (s.offsetParent !== null && s.offsetTop <= scrollY) {
+        current = s.id;
+      }
+    });
+    catLinks.forEach(function(link) {
+      link.classList.toggle('active', link.dataset.filter === current || (current === '' && link.dataset.filter === 'all'));
+    });
+  }, { passive: true });
+})();
+</script>
+{{ end }}

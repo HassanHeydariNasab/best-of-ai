@@ -1,0 +1,137 @@
+<div id="search-modal" class="search-modal" hidden>
+  <div class="search-modal__backdrop" id="search-backdrop"></div>
+  <div class="search-modal__box">
+    <div class="search-modal__header">
+      <span class="search-modal__title">Best of <span style="color:var(--accent)">AI</span></span>
+      <button class="search-modal__close" id="search-close" aria-label="Close search"><kbd>esc</kbd></button>
+    </div>
+    <div class="search-modal__input-wrap">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--fg-muted);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-3.5-3.5"/></svg>
+      <input type="text" id="search-input" class="search-modal__input" placeholder="Search AI tools..." autocomplete="off" spellcheck="false">
+    </div>
+    <div id="search-results" class="search-results" role="listbox"></div>
+    <div class="search-modal__footer">
+      <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> open</span>
+      <span><kbd>esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var index    = null;
+  var selected = -1;
+  var modal    = document.getElementById('search-modal');
+  var input    = document.getElementById('search-input');
+  var results  = document.getElementById('search-results');
+  var openBtn  = document.getElementById('search-open');
+  var closeBtn = document.getElementById('search-close');
+  var backdrop = document.getElementById('search-backdrop');
+
+  function openSearch() {
+    modal.removeAttribute('hidden');
+    document.body.classList.add('search-open');
+    input.focus();
+    if (!index) loadIndex();
+  }
+
+  function closeSearch() {
+    modal.setAttribute('hidden', '');
+    document.body.classList.remove('search-open');
+    input.value = '';
+    results.innerHTML = '';
+    selected = -1;
+  }
+
+  function loadIndex() {
+    fetch('{{ "/index.json" | relURL }}')
+      .then(function(r) { return r.json(); })
+      .then(function(d) { index = d; })
+      .catch(function() { index = []; });
+  }
+
+  function esc(s) {
+    return s.replace(/[&<>"']/g, function(c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function hi(text, q) {
+    if (!q) return esc(text);
+    var re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+    return esc(text).replace(re, '<mark>$1</mark>');
+  }
+
+  function doSearch(q) {
+    selected = -1;
+    if (!q || q.length < 2 || !index) { results.innerHTML = ''; return; }
+    var ql = q.toLowerCase();
+    var scored = [];
+    for (var i = 0; i < index.length; i++) {
+      var it   = index[i];
+      var name = (it.name || '').toLowerCase();
+      var desc = (it.description || '').toLowerCase();
+      var score = 0;
+      if (name === ql)            score = 4;
+      else if (name.startsWith(ql)) score = 3;
+      else if (name.includes(ql))   score = 2;
+      else if (desc.includes(ql))   score = 1;
+      else continue;
+      scored.push({ it: it, score: score });
+    }
+    scored.sort(function(a,b){ return b.score - a.score; });
+    var top = scored.slice(0, 10);
+    if (!top.length) {
+      results.innerHTML = '<div class="search-empty">No results for <strong>' + esc(q) + '</strong></div>';
+      return;
+    }
+    var html = '';
+    for (var j = 0; j < top.length; j++) {
+      var it   = top[j].it;
+      var desc = it.description ? it.description.slice(0, 80) : '';
+      html += '<a href="' + esc(it.url) + '" class="search-result" role="option" tabindex="-1">'
+        + '<span class="sr-cat">' + esc(it.category || '') + '</span>'
+        + '<span class="sr-body">'
+        +   '<span class="sr-name">' + hi(it.name || it.slug, q) + '</span>'
+        +   (desc ? '<span class="sr-desc">' + hi(desc, q) + '</span>' : '')
+        + '</span>'
+        + (it.price && it.price !== 'Free' ? '<span class="badge badge-' + it.price.toLowerCase() + '">' + esc(it.price) + '</span>' : '')
+        + '</a>';
+    }
+    results.innerHTML = html;
+  }
+
+  function getItems() { return results.querySelectorAll('.search-result'); }
+
+  function setSel(n) {
+    var items = getItems();
+    if (!items.length) return;
+    if (selected >= 0 && selected < items.length) items[selected].classList.remove('is-selected');
+    selected = Math.max(0, Math.min(n, items.length - 1));
+    items[selected].classList.add('is-selected');
+    items[selected].scrollIntoView({ block: 'nearest' });
+  }
+
+  input.addEventListener('input', function() { doSearch(input.value.trim()); });
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setSel(selected + 1); }
+    if (e.key === 'ArrowUp')   { e.preventDefault(); setSel(selected - 1); }
+    if (e.key === 'Enter' && selected >= 0) { e.preventDefault(); getItems()[selected]?.click(); }
+  });
+  results.addEventListener('click', function(e) {
+    if (e.target.closest('.search-result')) closeSearch();
+  });
+
+  openBtn.addEventListener('click', openSearch);
+  closeBtn.addEventListener('click', closeSearch);
+  backdrop.addEventListener('click', closeSearch);
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      modal.hasAttribute('hidden') ? openSearch() : closeSearch();
+    }
+    if (e.key === 'Escape' && !modal.hasAttribute('hidden')) closeSearch();
+  });
+})();
+</script>

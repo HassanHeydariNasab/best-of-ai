@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="container" style="padding:2rem 1.25rem 4rem">
+  <h1 style="margin-bottom:1.5rem">{{ .Title }}</h1>
+  <div class="tools-grid">
+  {{ range .Pages }}
+    <a href="{{ .RelPermalink }}" class="tool-card">
+      <div class="tool-card__body">
+        <span class="tool-card__name">{{ .Params.name | default .Title }}</span>
+        <span class="tool-card__desc">{{ .Params.description | truncate 80 }}</span>
+      </div>
+    </a>
+  {{ end }}
+  </div>
+</div>
+{{ end }}

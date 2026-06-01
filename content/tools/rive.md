@@ -1,0 +1,14 @@
+---
+title: 'Rive'
+name: 'Rive'
+subtitle: 'AI-powered interactive animation platform'
+slug: 'rive'
+description: 'Rive is a real-time interactive animation platform where designers create animations that respond to game state, user input, and data — not just play back a fixed sequence. Its runtime is lightweight enough to run in a browser, iOS app, or game engine without performance costs. UI engineers and game developers use Rive to add state-machine-driven animations that make interfaces feel genuinely alive.'
+website: 'https://rive.app'
+logo_url: ''
+category: 'animation'
+category_name: 'Animation'
+price: 'Freemium'
+featured: false
+date: '2025-09-21'
+---

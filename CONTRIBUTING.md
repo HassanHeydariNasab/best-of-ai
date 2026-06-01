@@ -1,0 +1,120 @@
+# Contributing to Awesome Best of AI
+
+Thanks for helping make this the best curated AI tools list. This guide explains how to add tools, fix data, and run the project locally.
+
+---
+
+## Ways to contribute
+
+| What | How |
+|---|---|
+| Add a tool | [Open an issue](https://github.com/best-of-ai/best-of-ai/issues/new?template=submit-tool.md) or submit a PR (see below) |
+| Fix tool info | Edit `content/tools/{slug}.md` and open a PR |
+| Add a category | Edit `data/categories.yaml` and open a PR |
+| Report a bug | [Open an issue](https://github.com/best-of-ai/best-of-ai/issues/new) |
+
+---
+
+## Adding a tool via PR
+
+Each tool is a Markdown file in `content/tools/`. Create a new file named after the tool's slug:
+
+```
+content/tools/my-tool.md
+```
+
+With this front matter:
+
+```yaml
+---
+title: 'My Tool'
+name: 'My Tool'
+slug: 'my-tool'
+description: 'One or two sentences describing what the tool does.'
+website: 'https://mytool.com'
+logo_url: ''
+category: 'productivity'
+category_name: 'Productivity'
+price: 'Freemium'
+featured: false
+date: '2025-01-01'
+---
+```
+
+### Field reference
+
+| Field | Required | Notes |
+|---|---|---|
+| `name` | ✅ | Display name of the tool |
+| `slug` | ✅ | URL-safe, lowercase, hyphens — must match filename |
+| `description` | ✅ | 1–2 sentences, factual, no marketing fluff |
+| `website` | ✅ | Full URL including `https://` |
+| `category` | ✅ | Slug of an existing category in `data/categories.yaml` |
+| `category_name` | ✅ | Human-readable category name (must match) |
+| `price` | ✅ | One of: `Free`, `Freemium`, `Paid` |
+| `logo_url` | — | Direct URL to a square logo image |
+| `featured` | — | `true` for highlighted tools (default `false`) |
+| `date` | — | Date added, `YYYY-MM-DD` |
+
+### Guidelines
+
+- **Quality over quantity** — the goal is a curated list, not a complete directory. Tools should be genuinely useful and notable.
+- **No self-promotion** — don't submit your own tool unless it's already well-known in the community.
+- **Accurate pricing** — use `Freemium` when there's a meaningful free tier, `Paid` when there's no free usage.
+- **Neutral descriptions** — describe what the tool does, not how great it is.
+- **One tool per PR** — keeps review fast and history clean.
+
+---
+
+## Adding a category
+
+Categories are defined in `data/categories.yaml`. Each entry looks like:
+
+```yaml
+-
+  id: 99
+  name: 'My Category'
+  description: 'Short description of what belongs here.'
+  slug: 'my-category'
+  sort_order: 0
+```
+
+- Use `sort_order: 1–20` for top-level categories that should appear first.
+- Use `sort_order: 0` for everything else (sorted alphabetically).
+
+---
+
+## Running locally
+
+**Prerequisites:** [Hugo](https://gohugo.io/installation/) and Python 3.
+
+```bash
+# Clone the repo
+git clone https://github.com/best-of-ai/best-of-ai.git
+cd best-of-ai
+
+# Preview the website
+hugo server
+# → open http://localhost:1313/
+
+# Regenerate README from content files
+python3 scripts/generate-readme.py
+```
+
+If you have a fresh SQL export to import:
+
+```bash
+python3 scripts/import-data.py
+```
+
+---
+
+## How README auto-update works
+
+On every push to `main` that touches `content/tools/`, `data/categories.yaml`, or `scripts/generate-readme.py`, the [Update README](.github/workflows/update-readme.yml) workflow runs `generate-readme.py` and commits the updated `README.md` back automatically.
+
+---
+
+## Code of Conduct
+
+Be respectful. Submissions and reviews should be about the tools and the data, not the people.
