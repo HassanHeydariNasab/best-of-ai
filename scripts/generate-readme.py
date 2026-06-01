@@ -147,19 +147,24 @@ for cat in active_cats:
     for t in tools:
         tool_name = t.get('name', '')
         website   = t.get('website', '')
-        desc_text = t.get('description', '')
+        slug      = t.get('slug', '')
+        desc_text = t.get('subtitle', '') or t.get('description', '')
         price     = t.get('price', '')
 
         # Truncate long descriptions
         if len(desc_text) > 120:
             desc_text = desc_text[:117].rstrip() + '...'
 
-        badge = price_badge(price) if price else ''
+        badge      = price_badge(price) if price else ''
+        review_url = f'{SITE_URL}/tools/{slug}/'
+        review     = f'[review]({review_url})'
 
         if website:
             entry = f'- **[{tool_name}]({website})**'
         else:
             entry = f'- **{tool_name}**'
+
+        entry += f' — {review}'
 
         if desc_text:
             entry += f' — {desc_text}'
