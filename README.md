@@ -402,6 +402,8 @@
 
 ## Others
 
+> Additional tools and resources.
+
 - **[GCS Cheats](https://gcscheats.com/)** — [review](https://bestofai.io/tools/gcs-cheats/) — Game cheats and modifications for online multiplayer games ![Paid](https://img.shields.io/badge/-Paid-8b949e?style=flat-square)
 
 ---
