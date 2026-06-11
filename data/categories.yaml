@@ -484,3 +484,9 @@
   description: 'Comprehensive directories and listings of AI tools and services'
   slug: 'ai-directories'
   sort_order: 71
+-
+  id: 99
+  name: 'Others'
+  description: 'Additional tools and resources.'
+  slug: 'others'
+  sort_order: 99
